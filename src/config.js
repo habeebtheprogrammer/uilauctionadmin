@@ -1,5 +1,5 @@
 
-const apiUrl =  "http://localhost"
+const apiUrl =  "https://uilauctionadmin.herokuapp.com"
     
 // "proxy": {
 //     "/api": {

@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
+// var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -34,7 +34,7 @@ app.use(helmet());
 // app.use(cors())
 app.disable('x-powered-by');
 // view engine setup
-app.set('views', path.join(__dirname, 'build'));
+app.set('views', path.join(__dirname,"../", 'build'));
 app.set('view engine', "html");
 
 app.engine('html', require('hbs').__express);
@@ -45,29 +45,19 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname,"../", 'build')));
 
 
 app.use('/', index);
 app.get('*',function(req, res){
-  res.sendFile(path.join(process.cwd(),"build/index.html"))
+  res.sendFile(path.join(__dirname,"../","build/index.html"))
 });
 
-
-var https = require('https')
 var http = require('http')
-const hskey = fs.readFileSync('./ssl/key.pem', "utf8");
-const hscert = fs.readFileSync('./ssl/mycert.pem', "utf8");
-
-const options = {
-  key: hskey,
-  cert: hscert,
-};
 var server = http.createServer(app);
-var server2 = https.createServer(options, app);
 
 // server2.listen(process.env.PORT ||3005, () => console.log("Server running on port 3004"))
-server.listen(process.env.PORT || 80, () => console.log("Server running on port 80"))
+server.listen(process.env.PORT || 3007, () => console.log("Server running on port 3007"))
 // app.listen(process.env.PORT || 3004,()=>console.log("Server running on port 3004"));
 module.exports = app;
  
